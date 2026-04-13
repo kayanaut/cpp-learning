@@ -21,10 +21,10 @@ int main(){
     }; 
 
     // IO Panel
-    std::cout << "Welcome to the fortune teller program! \n";
-    std::cout << "Please enter your name: \n";
+    std::cout << "Welcome to the fortune teller program!\n";
+    std::cout << "Please enter your name:\n";
     std::cin >> name;
-    std::cout << "Please enter the time of year when you were born: \n(pick from 'spring', 'summer', 'autumn', 'winter')\n";
+    std::cout << "Please enter the time of year when you were born:\n(pick from 'spring', 'summer', 'autumn', 'winter')\n";
     std::cin >> time;
     std::cout << "Please enter an adjective:\n";
     std::cin >> adj[0];

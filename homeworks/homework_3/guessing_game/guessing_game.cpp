@@ -17,21 +17,22 @@ int main() {
   bool success = false;
   // Welcome Panel
   std::cout << "Welcome to the GUESSING GAME!\n"
-            << "I will generate a number and you will guess it!" << std::endl;
+            << "I will generate a number and you will guess it!\n";
 
-  std::cout << "Please provide the smallest number: \n";
+  std::cout << "Please provide the smallest number:\n";
   std::cin >> smallest_number;
 
-  std::cout << "Please provide the largest number: \n";
+  std::cout << "Please provide the largest number:\n";
   std::cin >> largest_number;
 
   // Create random value
   std::uniform_int_distribution distribution{smallest_number, largest_number};
   random_created_value = distribution(random_engine);
 
-  std::cout << "I've generated a number. Try to guess it! \n";
+  std::cout << "I've generated a number. Try to guess it!\n";
 
   while (!success) {
+    std::cout << "Please provide the next guess: ";
     std::cin >> user_guess;
     guess_count++;
     if (user_guess < random_created_value) {
@@ -47,6 +48,5 @@ int main() {
       success = true;
     }
   }
-
   return 0;
 }

@@ -168,13 +168,135 @@ namespace {
 //     return 0;   
 // }
 
+
+// ---------------------------------------------
+
+
 // STL sequence containers in modern C++
 // std::pair
 #include <iostream>
 #include <utility>
- 
+#include <array>
+#include <vector>
+
+/* 
 int main() {
     std::pair pair{"The answer",42};
     std::cout << pair.first << " is " << pair.second  << std::endl;
+   
+   // Arrays 
+   std::array arr = {1,2,3};
+   std::array arr{1,2,3};
+    
+   arr.empty();
+   arr.size();
+   arr.front();  // First item
+   arr.back();   // Last item
+
+    // Vectors
+    std::vector vec = {1,2,3};
+    std::vector vec{1,2,3};
+    vec.clear();
+    vec.emplace_back(5);
+    vec.push_back(32); // historcially better
+
+    vec.resize(12,11);
+    // Make sure vector is not empty! UB otherwise!
+    
+    // Optimize vector resizing
+    std::vector<std::string> vec;
+    const int number_of_iterations = 100;
+    // Always call reserve when you know the size
+    vec.reserve(number_of_iterations);
+    for (int i = 0; i < number_of_iterations; ++i){
+        vec.emplace_back("hello");
+    }    
+
+   return 0;
+}
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
+
+int main() {
+    const vector numbers = {1,2,3};
+    vector<string> jedi = {"Yoda", "Anakin"};
+    jedi.reserve(jedi.size()+ 1UL);
+    jedi.push_back("Obi-Wan");
+    cout << "Some Jedi: " << jedi.front() << endl;
+    cout << "Last number: " << numbers.back() << endl;
     return 0;
 }
+
+// Strings are vectors of chars
+// Converting to and from strings 
+
+*/
+// ---------------------------------------------
+// STL associative containers
+// std::map to store ordered data in a tree like structure
+# include <map>
+std::map<char, double> map_default{};
+std::map<int, float, std::greater<int>>
+ map_greater{};
+std::map<int, double> map_explicit = {{42, 42.42}};
+// my_map.emplace(key, valuee); add item
+// my_map.at(key)
+// my_map[key] = value;  --- [] does not work on const maps!
+// my_map.count(key) > 0;
+// my_map.size();
+// my_map.empty();
+// my_map.clear();
+// my_map.erase(key);
+
+//Example
+
+#include <iostream>
+#include <map>
+
+using std::cout;
+using std::endl;
+
+int main() {
+    const std::map<int,double> const_map = {{42,42.42},{23,23.23}};
+
+    // Work with a const map
+    cout << "Map is empty: " << const_map.empty() << endl;
+    cout << "Map size: " << const_map.size() << endl;
+    cout << const_map.at(42) << endl;
+    // Work with a mutable map
+    std::map mutable_map = {std::pair{42,42.42}, std::pair{23,23.23}};
+
+    cout << "Map size: " << mutable_map.size() << endl;
+    mutable_map[4242] = 23.42; // Creates a new key-value pair
+    cout << "New map size: " << mutable_map.size() << endl;
+    cout << mutable_map.at(4242) << endl; // Ref to an existing value
+    mutable_map.at(4242) = 42.42;
+    cout << mutable_map.at(4242) << endl;
+    mutable_map.erase(4242);
+    cout << mutable_map.size() << endl;
+}
+
+// ---------------------------------------
+// Std unordered map
+#include <unordered_map>
+using std::unordered_map;
+
+// Merge maps
+std::unordered_map<std::string, int> map1{
+    {"A",1},{"B",2},{"C",3}};
+std::unordered_map<std::string, int> map2{
+    {"A",4},{"B",5},{"C",6}};
+
+void def() {
+    map1.merge(map2);
+}
+
+// Do not use floating point numbers as key!!!
